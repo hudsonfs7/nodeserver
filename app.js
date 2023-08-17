@@ -6,7 +6,7 @@ app.use(express.json())
 
 const products = []
 
-// Post =>
+// POST =>
 app.post('/products', (req, res) => {
   const { name, price } = req.body
 
@@ -21,6 +21,7 @@ app.post('/products', (req, res) => {
   return res.json(product)
 })
 
+// GET =>
 app.get('/products', (req, res) => {
   return res.json(products)
 })
@@ -31,6 +32,7 @@ app.get('/products/:id', (req, res) => {
   return res.json(product)
 })
 
+// PUT =>
 app.put('/products/:id', (req, res) => {
   const { id } = req.params
   const { name, price } = req.body
@@ -43,6 +45,17 @@ app.put('/products/:id', (req, res) => {
   }
 
   return res.json({ message: 'Produto alterado' })
+})
+
+// DELETE =>
+app.delete('/products/:id', (req, res) => {
+  const { id } = req.params
+
+  const productIndex = products.findIndex(product => product.id === id)
+
+  products.splice(productIndex, 1)
+
+  return res.json({ message: 'Produto removido' })
 })
 
 app.listen(4002, () => console.log('Nodemon rodando!'))
