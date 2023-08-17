@@ -28,8 +28,21 @@ app.get('/products', (req, res) => {
 app.get('/products/:id', (req, res) => {
   const { id } = req.params
   const product = products.find(product => product.id === id)
-  console.log(product)
   return res.json(product)
+})
+
+app.put('/products/:id', (req, res) => {
+  const { id } = req.params
+  const { name, price } = req.body
+
+  const productIndex = products.findIndex(product => product.id === id)
+  products[productIndex] = {
+    ...products[productIndex],
+    name,
+    price
+  }
+
+  return res.json({ message: 'Produto alterado' })
 })
 
 app.listen(4002, () => console.log('Nodemon rodando!'))
