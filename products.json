@@ -1,1 +1,12 @@
-[{"name":"Goiaba","price":6,"id":"43e3a1a5-3280-452e-8b4e-1c9be656128d"},{"name":"Manga","price":9,"id":"5d25d9b0-15c9-4df4-b45c-d681be157acc"}]
+[
+  {
+    "name": "Manga",
+    "price": 9,
+    "id": "3a58546e-09f8-45fa-bbd6-4ca822717b80"
+  },
+  {
+    "name": "Uva",
+    "price": 15,
+    "id": "51b2a7de-50e2-4eed-95d7-a763a2036358"
+  }
+]

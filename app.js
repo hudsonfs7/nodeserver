@@ -26,14 +26,7 @@ app.post('/products', (req, res) => {
   }
 
   products.push(product)
-  fs.writeFile('products.json', JSON.stringify(products), err => {
-    if (err) {
-      console.log(err)
-    } else {
-      console.log('Produto inserido')
-    }
-  })
-
+  handleFile()
   return res.json(product)
 })
 
@@ -60,6 +53,8 @@ app.put('/products/:id', (req, res) => {
     price
   }
 
+  handleFile()
+
   return res.json({ message: 'Produto alterado' })
 })
 
@@ -70,8 +65,19 @@ app.delete('/products/:id', (req, res) => {
   const productIndex = products.findIndex(product => product.id === id)
 
   products.splice(productIndex, 1)
+  handleFile()
 
   return res.json({ message: 'Produto removido' })
 })
+
+function handleFile() {
+  fs.writeFile('products.json', JSON.stringify(products), err => {
+    if (err) {
+      console.log(err)
+    } else {
+      console.log('Produto inserido')
+    }
+  })
+}
 
 app.listen(4002, () => console.log('Nodemon rodando!'))
