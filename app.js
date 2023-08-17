@@ -16,8 +16,19 @@ app.post('/products', (req, res) => {
     id: randomUUID()
   }
 
-  products.push({ product })
+  products.push(product)
 
+  return res.json(product)
+})
+
+app.get('/products', (req, res) => {
+  return res.json(products)
+})
+
+app.get('/products/:id', (req, res) => {
+  const { id } = req.params
+  const product = products.find(product => product.id === id)
+  console.log(product)
   return res.json(product)
 })
 
