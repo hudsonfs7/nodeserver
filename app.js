@@ -1,10 +1,19 @@
 const express = require('express')
 const { randomUUID } = require('crypto')
 const app = express()
+const fs = require('fs')
+const { error } = require('console')
 
 app.use(express.json())
 
-const products = []
+let products = []
+fs.readFile('products.json', 'utf-8', (err, data) => {
+  if (err) {
+    console.log(err)
+  } else {
+    products = JSON.parse(data)
+  }
+})
 
 // POST =>
 app.post('/products', (req, res) => {
@@ -17,6 +26,13 @@ app.post('/products', (req, res) => {
   }
 
   products.push(product)
+  fs.writeFile('products.json', JSON.stringify(products), err => {
+    if (err) {
+      console.log(err)
+    } else {
+      console.log('Produto inserido')
+    }
+  })
 
   return res.json(product)
 })
